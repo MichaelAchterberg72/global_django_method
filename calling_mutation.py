@@ -58,3 +58,10 @@ mutations, mutation_map = create_mutations_for_app(
 
 # For delete mutations, also include only models from the list
 delete_mutations, delete_mutation_map = create_delete_mutation_for_app(app_name, model_names)
+
+# Add the mutations to the Mutation class
+for mutation_name, mutation in mutation_map.items():
+    setattr(Mutation, mutation_name, mutation.Field())
+
+for mutation_name, mutation in delete_mutation_map.items():
+    setattr(Mutation, mutation_name, mutation.Field())
